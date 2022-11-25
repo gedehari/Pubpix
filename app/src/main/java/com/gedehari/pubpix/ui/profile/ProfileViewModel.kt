@@ -1,4 +1,4 @@
-package com.gedehari.pubpix.ui.notifications
+package com.gedehari.pubpix.ui.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
