@@ -7,18 +7,18 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.gedehari.pubpix.ui.home.HomeFragment"
+        android:name="com.gedehari.pubpix.ui.main.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.gedehari.pubpix.ui.notifications.NotificationsFragment"
+        android:name="com.gedehari.pubpix.ui.main.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.gedehari.pubpix.ui.profile.ProfileFragment"
-        android:label="fragment_profile"
+        android:name="com.gedehari.pubpix.ui.main.profile.ProfileFragment"
+        android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

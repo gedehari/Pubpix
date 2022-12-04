@@ -1,7 +1,7 @@
 package com.gedehari.pubpix.network
 
 import com.gedehari.pubpix.Config
-import com.gedehari.pubpix.model.Post
+import com.gedehari.pubpix.model.post.Post
 import com.haroldadmin.cnradapter.NetworkResponse
 import com.haroldadmin.cnradapter.NetworkResponseAdapterFactory
 import com.squareup.moshi.Moshi
@@ -22,10 +22,14 @@ interface ApiService {
     ): NetworkResponse<List<Post>, ErrorResponse>
 
     companion object {
+        // For parsing JSON body
         private val moshi = Moshi.Builder()
+            .add(UserJsonAdapter())
+            .add(PostJsonAdapter())
             .add(KotlinJsonAdapterFactory())
             .build()
 
+        // HTTP client
         private val retrofit = Retrofit.Builder()
             .addCallAdapterFactory(NetworkResponseAdapterFactory())
             .addConverterFactory(MoshiConverterFactory.create(moshi))

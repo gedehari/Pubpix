@@ -1,4 +1,4 @@
-package com.gedehari.pubpix.ui.notifications
+package com.gedehari.pubpix.ui.main.profile
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.gedehari.pubpix.databinding.FragmentNotificationsBinding
+import com.gedehari.pubpix.databinding.FragmentProfileBinding
 
-class NotificationsFragment : Fragment() {
-    private var _binding: FragmentNotificationsBinding? = null
+class ProfileFragment : Fragment() {
+    private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -18,13 +18,13 @@ class NotificationsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel = ViewModelProvider(this)[NotificationsViewModel::class.java]
+        val profileViewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
 
-        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
+        profileViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
 

@@ -12,5 +12,14 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
+        <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
+    </style>
+
+    <style name="CustomActivityAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/open_enter_anim</item>
+        <item name="android:activityOpenExitAnimation">@anim/open_exit_anim</item>
+        <item name="android:activityCloseEnterAnimation">@anim/close_enter_anim</item>
+        <item name="android:activityCloseExitAnimation">@anim/close_exit_anim</item>
     </style>
 </resources>

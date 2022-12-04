@@ -1,4 +1,4 @@
-package com.gedehari.pubpix.ui
+package com.gedehari.pubpix.ui.main
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView

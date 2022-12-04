@@ -1,6 +1,6 @@
-package com.gedehari.pubpix.model
+package com.gedehari.pubpix.model.user
 
-data class User(
+data class UserJson(
     val id: Int,
     val username: String,
     val displayName: String,

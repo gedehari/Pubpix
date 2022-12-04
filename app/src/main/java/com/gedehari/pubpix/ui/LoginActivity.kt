@@ -3,14 +3,11 @@ package com.gedehari.pubpix.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.gedehari.pubpix.databinding.ActivityLoginBinding
-import com.gedehari.pubpix.network.ApiService
-import com.google.android.material.snackbar.Snackbar
-import com.haroldadmin.cnradapter.NetworkResponse
+import com.gedehari.pubpix.ui.main.MainActivity
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
     private val scope = CoroutineScope(Dispatchers.Main)
@@ -22,20 +19,32 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
 
-        scope.launch {
-            when (val result = ApiService.getClient().getPosts()) {
-                is NetworkResponse.Success -> {
-                    Log.i("PubPix", result.body.toString())
-                }
-                else -> {
-                    Snackbar.make(binding.root, "API or network error!", Snackbar.LENGTH_SHORT).show()
-                }
+        binding.loginButton.setOnClickListener {
+            if (checkInput()) {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
             }
         }
 
-        binding.loginButton.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
+        binding.signUpButton.setOnClickListener {
+            startActivity(Intent(this, SignUpActivity::class.java))
         }
+    }
+
+    private fun checkInput(): Boolean {
+        var usernameValid = !isTextFieldBlank(binding.usernameInput)
+        var passwordValid = !isTextFieldBlank(binding.passwordInput)
+
+        return usernameValid && passwordValid
+    }
+
+    private fun isTextFieldBlank(input: TextInputLayout): Boolean {
+        if (input.editText!!.text!!.isBlank()) {
+            input.error = "*Required"
+            return true
+        }
+
+        input.error = null
+        return false
     }
 }

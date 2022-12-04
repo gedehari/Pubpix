@@ -1,4 +1,4 @@
-package com.gedehari.pubpix.ui.profile
+package com.gedehari.pubpix.ui.main.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

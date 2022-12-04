@@ -2,7 +2,7 @@
     <string name="app_name">Pubpix</string>
 
     <string name="logo_description">Pubpix logo</string>
-    <string name="label_please_login">Please login lololol</string>
+    <string name="label_please_login">Welcome! Please log in to continue.</string>
     <string name="label_username">Username</string>
     <string name="label_password">Password</string>
     <string name="label_log_in">Log In</string>

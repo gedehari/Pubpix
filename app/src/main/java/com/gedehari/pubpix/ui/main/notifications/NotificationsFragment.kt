@@ -1,4 +1,4 @@
-package com.gedehari.pubpix.ui.home
+package com.gedehari.pubpix.ui.main.notifications
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.gedehari.pubpix.databinding.FragmentHomeBinding
+import com.gedehari.pubpix.databinding.FragmentNotificationsBinding
 
-class HomeFragment : Fragment() {
-    private var _binding: FragmentHomeBinding? = null
+class NotificationsFragment : Fragment() {
+    private var _binding: FragmentNotificationsBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -18,13 +18,13 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+        val notificationsViewModel = ViewModelProvider(this)[NotificationsViewModel::class.java]
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.textNotifications
+        notificationsViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
 
