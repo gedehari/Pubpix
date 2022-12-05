@@ -13,8 +13,6 @@ class StartActivity : AppCompatActivity() {
         setContentView(R.layout.activity_start)
         supportActionBar?.hide()
 
-        Log.i("PubPix", Instant.now().toString())
-
         startActivity(Intent(this, LoginActivity::class.java))
         finish()
     }

@@ -1,6 +1,8 @@
 package com.gedehari.pubpix.network
 
 import com.gedehari.pubpix.Config
+import com.gedehari.pubpix.model.LoginRequestJson
+import com.gedehari.pubpix.model.LoginResponseJson
 import com.gedehari.pubpix.model.post.Post
 import com.haroldadmin.cnradapter.NetworkResponse
 import com.haroldadmin.cnradapter.NetworkResponseAdapterFactory
@@ -8,10 +10,16 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface ApiService {
+    @Headers("Content-Type: application/json")
+    @POST("user/signin")
+    suspend fun signIn(
+        @Body
+        loginRequestJson: LoginRequestJson
+    ): NetworkResponse<LoginResponseJson, ErrorResponse>
+
     @GET("post")
     suspend fun getPosts(
         @Query("from")
