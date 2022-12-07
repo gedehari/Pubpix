@@ -1,9 +1,4 @@
-package com.gedehari.pubpix.model
-
-data class LoginRequestJson(
-    val username: String,
-    val password: String
-)
+package com.gedehari.pubpix.model.login
 
 data class LoginResponseJson(
     val accessToken: String,

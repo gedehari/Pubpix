@@ -3,11 +3,9 @@ package com.gedehari.pubpix.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import com.gedehari.pubpix.databinding.ActivityLoginBinding
-import com.gedehari.pubpix.model.LoginRequestJson
-import com.gedehari.pubpix.network.ApiService
+import com.gedehari.pubpix.repo.AuthRepository
 import com.gedehari.pubpix.ui.main.MainActivity
 import com.google.android.material.textfield.TextInputLayout
 import com.haroldadmin.cnradapter.NetworkResponse
@@ -29,9 +27,7 @@ class LoginActivity : AppCompatActivity() {
 
         binding.loginButton.setOnClickListener {
             if (checkInput())
-                scope.launch {
-                    tryLogin()
-                }
+                scope.launch { tryLogin() }
         }
 
         binding.signUpButton.setOnClickListener {
@@ -54,19 +50,18 @@ class LoginActivity : AppCompatActivity() {
             signUpButton.isEnabled = false
         }
 
-        val request = LoginRequestJson(
+        val response = AuthRepository.login(
             binding.usernameInput.editText!!.text!!.toString(),
             binding.passwordInput.editText!!.text!!.toString()
         )
 
-        val person = ApiService.getClient().signIn(request)
-        when (person) {
+        when (response) {
             is NetworkResponse.Success -> {
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
             is NetworkResponse.Error -> {
-                setErrorText("Error: something wrong idk")
+                setErrorText("Error: ${response.body?.err}")
                 binding.apply {
                     usernameInput.isEnabled = true
                     passwordInput.isEnabled = true

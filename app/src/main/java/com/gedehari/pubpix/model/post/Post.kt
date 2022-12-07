@@ -14,15 +14,14 @@ data class Post(
     val caption: String,
     val imageUuid: String,
     val createdAt: Date,
-    val author: User
-    //val authorId: Int
+    val authorId: Int
 )
 
-//data class PostWithUser(
-//    @Embedded val post: Post,
-//    @Relation(
-//        parentColumn = "postId",
-//        entityColumn = "userId"
-//    )
-//    val user: User
-//)
+data class PostWithUser(
+    @Embedded val post: Post,
+    @Relation(
+        parentColumn = "postId",
+        entityColumn = "userId"
+    )
+    val user: User
+)
