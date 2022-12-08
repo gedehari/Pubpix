@@ -1,15 +1,16 @@
 <resources>
     <string name="app_name">Pubpix</string>
 
-    <string name="logo_description">Pubpix logo</string>
+    <string name="desc_logo">Pubpix logo</string>
     <string name="label_please_login">Welcome! Please log in to continue.</string>
     <string name="label_username">Username</string>
     <string name="label_password">Password</string>
     <string name="label_log_in">Log In</string>
     <string name="label_sign_up">Sign Up</string>
 
-    <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_profile">Profile</string>
+
+    <string name="desc_add_post">Add post</string>
 </resources>
