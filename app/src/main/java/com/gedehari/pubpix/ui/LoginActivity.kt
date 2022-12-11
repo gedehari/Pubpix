@@ -61,7 +61,10 @@ class LoginActivity : AppCompatActivity() {
                 finish()
             }
             is NetworkResponse.Error -> {
-                setErrorText("Error: ${response.body?.err}")
+                if (response is NetworkResponse.NetworkError)
+                    setErrorText("Network error!")
+                else
+                    setErrorText("Error: ${response.body?.err}")
                 binding.apply {
                     usernameInput.isEnabled = true
                     passwordInput.isEnabled = true
