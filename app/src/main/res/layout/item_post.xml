@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp">
+    android:layout_margin="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,24 +13,10 @@
         android:orientation="vertical"
         android:padding="10dp">
 
-        <TextView
-            android:id="@+id/post_title"
-            style="@style/TextAppearance.AppCompat.Headline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Post Title" />
-
-        <TextView
-            android:id="@+id/post_author"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="by John Doe" />
-
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/post_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:adjustViewBounds="true"
             android:scaleType="fitStart"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
@@ -40,8 +26,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            style="@style/TextAppearance.AppCompat.Body1"
-            tools:text="Thought Message" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            tools:text="Post caption" />
+
+        <TextView
+            android:id="@+id/post_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            tools:text="by John Doe" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray"/>
+
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</FrameLayout>

@@ -1,6 +1,7 @@
 package com.gedehari.pubpix.ui.main.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.gedehari.pubpix.databinding.FragmentHomeBinding
 import kotlinx.coroutines.launch
 
@@ -28,10 +30,18 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.allPosts.observe(viewLifecycleOwner) {
 
+        val adapter = PostListAdapter()
+        binding.postList.layoutManager = LinearLayoutManager(this.context)
+        binding.postList.adapter = adapter
+
+        viewModel.allPosts.observe(viewLifecycleOwner) {
+            Log.i("PubPix", it.toString())
+            adapter.submitList(it)
         }
+
         binding.swipeRefresh.setOnRefreshListener { updatePosts() }
+
         updatePosts()
     }
 

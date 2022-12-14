@@ -2,6 +2,7 @@ package com.gedehari.pubpix.repo
 
 import android.util.Log
 import androidx.lifecycle.LiveData
+import com.gedehari.pubpix.Config
 import com.gedehari.pubpix.database.AppDatabase
 import com.gedehari.pubpix.model.post.Post
 import com.gedehari.pubpix.network.ApiService
@@ -26,5 +27,9 @@ object PostRepository {
                 return false
             }
         }
+    }
+
+    fun getImageUrl(imageUuid: String): String {
+        return "${Config.BASE_URL}uploads/${imageUuid}.jpg"
     }
 }

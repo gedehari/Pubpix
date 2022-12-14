@@ -13,11 +13,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PostDao {
-//    @Transaction
-//    @Query("SELECT * FROM post ORDER BY postId DESC")
-//    fun getAll(): List<PostWithUser>
-
-    @Query("SELECT * FROM post")
+    @Query("SELECT * FROM post ORDER BY postId DESC")
     fun getPosts(): Flow<List<Post>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
