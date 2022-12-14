@@ -6,6 +6,7 @@ import com.gedehari.pubpix.model.login.LoginRequestJson
 import com.gedehari.pubpix.model.login.LoginResponseJson
 import com.gedehari.pubpix.model.login.RefreshRequestJson
 import com.gedehari.pubpix.model.post.Post
+import com.gedehari.pubpix.model.post.PostWithUser
 import com.haroldadmin.cnradapter.NetworkResponse
 import com.haroldadmin.cnradapter.NetworkResponseAdapterFactory
 import com.squareup.moshi.Moshi
@@ -35,7 +36,7 @@ interface ApiService {
 
         @Query("limit")
         limit: Int = 0 // server default is 10
-    ): NetworkResponse<List<Post>, ErrorResponse>
+    ): NetworkResponse<List<PostWithUser>, ErrorResponse>
 
     companion object {
         // For parsing JSON body

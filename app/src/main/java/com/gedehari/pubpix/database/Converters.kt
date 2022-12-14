@@ -1,10 +1,8 @@
 package com.gedehari.pubpix.database
 
-import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
 import java.util.Date
 
-@ProvidedTypeConverter
 class Converters {
     @TypeConverter
     fun epochToDate(value: Long?): Date? {

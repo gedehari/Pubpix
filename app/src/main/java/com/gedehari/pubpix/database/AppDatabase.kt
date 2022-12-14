@@ -18,19 +18,18 @@ abstract class AppDatabase: RoomDatabase() {
         @Volatile
         private var instance: AppDatabase? = null
 
-        fun getDatabase(context: Context): AppDatabase {
-            return instance ?: synchronized(this) {
-                val newInstance = Room.databaseBuilder(
-                    context.applicationContext,
-                    AppDatabase::class.java,
-                    "thought_database"
-                )
-                    .fallbackToDestructiveMigration()
-                    .build()
+        fun initialize(context: Context) {
+            val newInstance = Room.databaseBuilder(
+                context.applicationContext,
+                AppDatabase::class.java,
+                "thought_database"
+            )
+                .fallbackToDestructiveMigration()
+                .build()
 
-                instance = newInstance
-                return newInstance
-            }
+            instance = newInstance
         }
+
+        fun getInstance(): AppDatabase = instance!!
     }
 }

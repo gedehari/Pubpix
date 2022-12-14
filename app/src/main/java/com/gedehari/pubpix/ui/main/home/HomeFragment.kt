@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.gedehari.pubpix.databinding.FragmentHomeBinding
 import kotlinx.coroutines.launch
@@ -29,6 +28,10 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.allPosts.observe(viewLifecycleOwner) {
+
+        }
+        binding.swipeRefresh.setOnRefreshListener { updatePosts() }
         updatePosts()
     }
 
@@ -38,10 +41,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun updatePosts() {
+        binding.swipeRefresh.isRefreshing = true
         lifecycleScope.launch {
-//            viewModel.fetchLatestPosts()
-//            if (viewModel.allPosts.value!!.isEmpty())
-//                Toast.makeText(activity, "No posts :(", Toast.LENGTH_SHORT).show()
+            if (!viewModel.refreshPosts())
+                Toast.makeText(activity, "No posts :(", Toast.LENGTH_SHORT).show()
+            binding.swipeRefresh.isRefreshing = false
         }
     }
 }

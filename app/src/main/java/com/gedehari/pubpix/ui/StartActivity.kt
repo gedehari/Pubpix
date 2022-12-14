@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.gedehari.pubpix.R
+import com.gedehari.pubpix.database.AppDatabase
 import com.gedehari.pubpix.repo.PreferenceRepository
 import com.gedehari.pubpix.repo.AuthRepository
 import com.gedehari.pubpix.ui.main.MainActivity
@@ -16,9 +17,9 @@ class StartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)
         supportActionBar?.hide()
-
+        
+        AppDatabase.initialize(this)
         PreferenceRepository.sharedPreferences = getSharedPreferences(PreferenceRepository.APP_KEY, Context.MODE_PRIVATE)
-
         runBlocking { checkIfLoggedIn() }
     }
 

@@ -3,15 +3,16 @@ package com.gedehari.pubpix.ui.main.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.gedehari.pubpix.database.dao.PostDao
-import com.gedehari.pubpix.model.post.PostWithUser
+import androidx.lifecycle.asLiveData
+import com.gedehari.pubpix.database.AppDatabase
+import com.gedehari.pubpix.model.post.Post
 import com.gedehari.pubpix.repo.PostRepository
 
 class HomeViewModel : ViewModel() {
-    lateinit var allPosts: LiveData<List<PostWithUser>>
+    val allPosts = AppDatabase.getInstance().postDao().getPosts().asLiveData()
 
-    suspend fun fetchLatestPosts() {
-
+    suspend fun refreshPosts(): Boolean {
+        return PostRepository.refreshPosts(allPosts)
     }
 }
 
