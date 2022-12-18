@@ -4,6 +4,7 @@ import com.gedehari.pubpix.model.error.ErrorResponse
 import com.gedehari.pubpix.model.login.LoginRequestJson
 import com.gedehari.pubpix.model.login.LoginResponseJson
 import com.gedehari.pubpix.model.login.RefreshRequestJson
+import com.gedehari.pubpix.model.signUp.SignUpRequestJson
 import com.gedehari.pubpix.network.ApiService
 import com.haroldadmin.cnradapter.NetworkResponse
 
@@ -11,6 +12,21 @@ object AuthRepository {
     suspend fun login(username: String, password: String): NetworkResponse<LoginResponseJson, ErrorResponse> {
         val request = LoginRequestJson(username, password)
         val response = ApiService.getClient().signIn(request)
+        when (response) {
+            is NetworkResponse.Success -> {
+                PreferenceRepository.accessToken = response.body.accessToken
+                PreferenceRepository.refreshToken = response.body.refreshToken
+            }
+            else -> {}
+        }
+
+        return response
+    }
+
+    suspend fun signUp(username: String, displayName: String, password: String):
+            NetworkResponse<LoginResponseJson, ErrorResponse> {
+        val request = SignUpRequestJson(username, displayName, password)
+        val response = ApiService.getClient().signUp(request)
         when (response) {
             is NetworkResponse.Success -> {
                 PreferenceRepository.accessToken = response.body.accessToken

@@ -31,9 +31,12 @@ class StartActivity : AppCompatActivity() {
                     finish()
                     return
                 }
-                else -> {}
+                else -> {
+                    AppDatabase.getInstance().postDao().obliterate()
+                }
             }
         }
+
         startActivity(Intent(this, LoginActivity::class.java))
         finish()
     }

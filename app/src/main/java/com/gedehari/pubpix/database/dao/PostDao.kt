@@ -21,4 +21,7 @@ interface PostDao {
 
     @Delete
     suspend fun delete(post: Post)
+
+    @Query("DELETE FROM post")
+    suspend fun obliterate()
 }

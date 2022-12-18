@@ -57,8 +57,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-"
-                android:inputType="textFilter|textVisiblePassword|textNoSuggestions"/>
+                android:digits="abcdefghijklmnopqrstuvwxyz0123456789-"
+                android:inputType="textFilter|textVisiblePassword|textNoSuggestions" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

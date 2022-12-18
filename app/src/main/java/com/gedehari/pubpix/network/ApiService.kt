@@ -7,6 +7,7 @@ import com.gedehari.pubpix.model.login.LoginResponseJson
 import com.gedehari.pubpix.model.login.RefreshRequestJson
 import com.gedehari.pubpix.model.post.Post
 import com.gedehari.pubpix.model.post.PostWithUser
+import com.gedehari.pubpix.model.signUp.SignUpRequestJson
 import com.haroldadmin.cnradapter.NetworkResponse
 import com.haroldadmin.cnradapter.NetworkResponseAdapterFactory
 import com.squareup.moshi.Moshi
@@ -21,6 +22,12 @@ interface ApiService {
     suspend fun signIn(
         @Body
         request: LoginRequestJson
+    ): NetworkResponse<LoginResponseJson, ErrorResponse>
+
+    @POST("auth/signUp")
+    suspend fun signUp(
+        @Body
+        request: SignUpRequestJson
     ): NetworkResponse<LoginResponseJson, ErrorResponse>
 
     @POST("auth/refresh")
