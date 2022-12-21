@@ -11,6 +11,7 @@ class RequestInterceptor: Interceptor {
         if (accessToken.isBlank())
             return chain.proceed(oldRequest)
         val newRequest = oldRequest.newBuilder()
+            .header("Cache-Control", "no-cache")
             .header("Authorization", "Bearer $accessToken")
             .build()
         return chain.proceed(newRequest)

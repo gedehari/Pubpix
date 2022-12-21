@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.gedehari.pubpix.databinding.ActivityLoginBinding
+import com.gedehari.pubpix.model.error.ErrorResponse
+import com.gedehari.pubpix.model.error.ErrorType
 import com.gedehari.pubpix.repo.AuthRepository
 import com.gedehari.pubpix.ui.main.MainActivity
 import com.google.android.material.textfield.TextInputLayout
@@ -61,10 +63,14 @@ class LoginActivity : AppCompatActivity() {
                 finish()
             }
             is NetworkResponse.Error -> {
-                if (response is NetworkResponse.NetworkError)
-                    setErrorText("Network error!")
-                else
-                    setErrorText("Error: ${response.body?.err}")
+                var errorDesc = when (response.body?.err) {
+                    ErrorType.MISSING_CREDENTIALS -> "Missing credentials (this error wasn't supposed to happen)"
+                    ErrorType.INVALID_CREDENTIALS -> "Username or password is wrong."
+                    else -> null
+                }
+                if (errorDesc == null)
+                    errorDesc = ErrorResponse.getErrorResponseDesc(response)
+                setErrorText("$errorDesc")
                 binding.apply {
                     usernameInput.isEnabled = true
                     passwordInput.isEnabled = true

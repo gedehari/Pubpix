@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.View
 import com.gedehari.pubpix.R
 import com.gedehari.pubpix.databinding.ActivitySignUpBinding
+import com.gedehari.pubpix.model.error.ErrorResponse
+import com.gedehari.pubpix.model.error.ErrorType
 import com.gedehari.pubpix.repo.AuthRepository
 import com.gedehari.pubpix.ui.main.MainActivity
 import com.google.android.material.textfield.TextInputLayout
@@ -72,17 +74,23 @@ class SignUpActivity : AppCompatActivity() {
                 finish()
             }
             is NetworkResponse.Error -> {
-                if (response is NetworkResponse.NetworkError)
-                    setErrorText("Network error!")
-                else
-                    setErrorText("Error: ${response.body?.err}")
+                var errorDesc = when (response.body?.err) {
+                    ErrorType.USERNAME_EXISTS -> "This username is used by another user, please pick another."
+                    ErrorType.INVALID_USERNAME -> "Username is in a wrong format!"
+                    ErrorType.INVALID_PASSWORD -> "Password is too short or in a wrong format!"
+                    ErrorType.MISSING_CAPTION -> "Cannot post with an empty caption!"
+                    else -> null
+                }
+                if (errorDesc == null)
+                    errorDesc = ErrorResponse.getErrorResponseDesc(response)
+                setErrorText("$errorDesc")
                 binding.apply {
-                    usernameInput.isEnabled = false
-                    displayNameInput.isEnabled = false
-                    passwordInput.isEnabled = false
-                    repeatPasswordInput.isEnabled = false
-                    signupButton.isEnabled = false
-                    cancelButton.isEnabled = false
+                    usernameInput.isEnabled = true
+                    displayNameInput.isEnabled = true
+                    passwordInput.isEnabled = true
+                    repeatPasswordInput.isEnabled = true
+                    signupButton.isEnabled = true
+                    cancelButton.isEnabled = true
                 }
             }
         }

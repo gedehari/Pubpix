@@ -26,7 +26,7 @@ class StartActivity : AppCompatActivity() {
     private suspend fun checkIfLoggedIn() {
         if (PreferenceRepository.refreshToken!!.isNotBlank()) {
             when (AuthRepository.refresh()) {
-                is NetworkResponse.Success -> {
+                is NetworkResponse.Success, is NetworkResponse.NetworkError -> {
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
                     return
